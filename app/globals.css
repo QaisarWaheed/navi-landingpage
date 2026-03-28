@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #0f2b5c;
+  --accent: #0073fc;
+  --accent-hover: #0066e0;
+  --white: #ffffff;
+  /* Single off-white canvas for the whole page (no mixed greys) */
+  --canvas: #f4f5f7;
+  --icon-tile: #e8f2fc;
+  --hairline: #e2e7ef;
+
+  --background: var(--canvas);
+  --foreground: var(--navy);
+  --muted: var(--navy);
+  --border: var(--navy);
+  --surface: var(--white);
+  --video-chrome: var(--navy);
 }
 
 @theme inline {
+  --color-navy: var(--navy);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-white: var(--white);
+  --color-canvas: var(--canvas);
+  --color-icon-tile: var(--icon-tile);
+  --color-hairline: var(--hairline);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-video-chrome: var(--video-chrome);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --animate-fade-in-up: fade-in-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
+
