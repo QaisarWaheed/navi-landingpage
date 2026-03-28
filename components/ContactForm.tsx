@@ -18,8 +18,10 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const next: Errors = {};
 
@@ -31,16 +33,46 @@ export function ContactForm() {
       next.message = "Please write at least 10 characters.";
 
     setErrors(next);
+    setFormError(null);
     if (Object.keys(next).length > 0) {
       setSubmitted(false);
       return;
     }
 
-    setSubmitted(true);
+    setPending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+
+      if (!res.ok) {
+        setSubmitted(false);
+        setFormError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setSubmitted(false);
+      setFormError("Could not reach the server. Check your connection and try again.");
+    } finally {
+      setPending(false);
+    }
   }
 
   const inputClass =
-    "mt-1.5 w-full rounded-lg border border-navy/20 bg-white px-3.5 py-2.5 text-sm text-navy shadow-sm outline-none transition-all duration-200 ease-out placeholder:text-accent hover:border-navy/35 focus:border-accent focus:ring-2 focus:ring-accent motion-safe:focus:shadow-[0_0_0_3px_rgba(0,115,252,0.2)]";
+    "mt-1.5 w-full rounded-lg border border-navy/20 bg-white px-3.5 py-2.5 text-sm text-navy shadow-sm outline-none transition-all duration-200 ease-out placeholder:text-accent hover:border-navy/35 focus:border-accent focus:ring-2 focus:ring-accent motion-safe:focus:shadow-[0_0_0_3px_rgba(0,115,252,0.2)] disabled:cursor-not-allowed disabled:opacity-60";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
@@ -56,6 +88,7 @@ export function ContactForm() {
             autoComplete="name"
             placeholder="e.g. Jane Smith"
             value={name}
+            disabled={pending}
             onChange={(e) => {
               setName(e.target.value);
               if (errors.name) setErrors((p) => ({ ...p, name: undefined }));
@@ -82,6 +115,7 @@ export function ContactForm() {
             autoComplete="email"
             placeholder="you@company.com"
             value={email}
+            disabled={pending}
             onChange={(e) => {
               setEmail(e.target.value);
               if (errors.email) setErrors((p) => ({ ...p, email: undefined }));
@@ -108,6 +142,7 @@ export function ContactForm() {
           rows={5}
           placeholder="Tell us about your team, timeline, or how we can help…"
           value={message}
+          disabled={pending}
           onChange={(e) => {
             setMessage(e.target.value);
             if (errors.message) setErrors((p) => ({ ...p, message: undefined }));
@@ -124,12 +159,22 @@ export function ContactForm() {
       </div>
 
       <div className="space-y-3">
-        <Button type="submit" variant="primary" className="w-full rounded-lg py-3 text-base font-semibold">
-          Send Message
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={pending}
+          className="w-full rounded-lg py-3 text-base font-semibold disabled:pointer-events-none"
+        >
+          {pending ? "Sending…" : "Send Message"}
         </Button>
+        {formError && (
+          <p className="text-sm text-red-600" role="alert">
+            {formError}
+          </p>
+        )}
         {submitted && (
           <p className="text-sm font-medium text-accent" role="status">
-            Thanks — your message passes validation. (No backend yet.)
+            Thanks — your message was sent. We&apos;ll get back to you soon.
           </p>
         )}
       </div>
