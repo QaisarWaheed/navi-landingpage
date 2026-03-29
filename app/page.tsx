@@ -98,7 +98,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <Button
-                  href="https://app.changewithnavi.com"
+                  href="https://navi-frontend.changewithnavi.com/signup"
                   variant="getStarted"
                   className="inline-flex !h-12 min-h-12 shrink-0 !px-8 !py-0 text-base font-semibold shadow-none hover:shadow-sm"
                 >
