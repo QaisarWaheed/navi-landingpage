@@ -53,7 +53,7 @@ export function Navbar() {
           </ul>
 
           <div className="hidden md:col-start-3 md:row-start-1 md:block md:justify-self-end">
-            <Button href="https://navi-frontend.changewithnavi.com/signup" variant="getStarted">
+            <Button href="https://app.changewithnavi.com" variant="getStarted">
               Get Started
             </Button>
           </div>
@@ -105,7 +105,7 @@ export function Navbar() {
               })}
               <li className="px-3 pt-2">
                 <Button
-                  href="https://navi-frontend.changewithnavi.com/signup"
+                  href="https://app.changewithnavi.com"
                   variant="getStarted"
                   className="w-full !max-w-none justify-center"
                   onClick={() => setOpen(false)}
