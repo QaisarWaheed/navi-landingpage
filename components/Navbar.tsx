@@ -10,6 +10,7 @@ const links = [
   { href: "/", label: "Home", match: (p: string) => p === "/" },
   { href: "/#about", label: "About", match: () => false },
   { href: "/#how-it-works", label: "How It Works", match: () => false },
+  { href: "/resources", label: "Resources", match: (p: string) => p === "/resources" },
   { href: "/privacy-policy", label: "Privacy Policy", match: (p: string) => p === "/privacy-policy" },
   { href: "/#contact", label: "Contact Us", match: () => false },
 ] as const;

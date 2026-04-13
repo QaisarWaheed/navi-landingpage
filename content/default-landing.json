@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "brandTitle": "NAVI",
+    "tagline": "Your Change Navigator",
+    "subtext": "Leading teams through the architecture of transformation.",
+    "rightEyebrow": "Modern SaaS Solutions",
+    "rightTitle": "Simplify Your Workflow",
+    "rightBody": "Bring plans, people, and progress together so your team can focus on outcomes—not overhead. NAVI keeps change visible, accountable, and on track.",
+    "getStartedUrl": "https://app.changewithnavi.com"
+  },
+  "about": {
+    "heading": "About Us",
+    "lead": "We build the operating system for change—not another project tracker.",
+    "body": "NAVI helps leaders and teams replace scattered updates with a single narrative: what is changing, why it matters, and who does what next. From strategy to execution, you get clarity without the noise.",
+    "testimonialQuote": "NAVI gave our leadership team one story for transformation—finally everyone pulled in the same direction.",
+    "testimonialInitials": "SC",
+    "testimonialName": "Sarah Chen",
+    "testimonialRole": "Chief Strategy Officer"
+  },
+  "howItWorks": {
+    "heading": "How It Works",
+    "steps": [
+      {
+        "title": "Audit & Analyze",
+        "body": "Map stakeholders, constraints, and readiness so you know what to tackle first—and what to defer."
+      },
+      {
+        "title": "Design Roadmaps",
+        "body": "Sequence initiatives with clear owners, milestones, and measures everyone can follow."
+      },
+      {
+        "title": "Execute & Iterate",
+        "body": "Run the plan, capture learnings, and adjust without losing sight of the goal or your people."
+      }
+    ],
+    "gettingStartedVideoUrl": "",
+    "gettingStartedVideoHeading": "How to get started",
+    "gettingStartedVideoSubtext": "Watch a short walkthrough of NAVI—set up your workspace and run your first change plan with confidence."
+  },
+  "resources": {
+    "pageTitle": "Resources",
+    "pageIntro": "Articles and updates from the NAVI team—guides, ideas, and stories on navigating change.",
+    "items": [
+      {
+        "id": "sample-1",
+        "title": "Why change needs a single narrative",
+        "excerpt": "How leadership teams align faster when everyone sees the same story for transformation.",
+        "url": "https://changewithnavi.com",
+        "date": "March 2026"
+      }
+    ]
+  },
+  "privacy": {
+    "pill": "Trust & Security",
+    "heading": "Privacy Policy",
+    "body": "We take data protection seriously. NAVI is designed with security in mind—from how we handle contact inquiries to how we plan for enterprise-grade controls. Our full policy explains what we collect, why we collect it, and how you stay in control.",
+    "lastUpdated": "Last updated: March 28, 2026"
+  },
+  "contact": {
+    "heading": "Get in Touch",
+    "subtext": "Tell us about your organization—we'll get back to you shortly.",
+    "sidebarTitle": "Contact Information",
+    "email": "hello@navi.io",
+    "phone": "+1 (800) 555-1234",
+    "addressLine1": "100 Navigator Way",
+    "addressLine2": "San Francisco, CA 94105"
+  }
+}
