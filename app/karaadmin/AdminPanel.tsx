@@ -600,50 +600,6 @@ function Editor({
       </section>
 
       <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-bold text-navy">Lead magnet</h2>
-        <p className="mt-1 text-sm text-navy/80">Optional funnel copy; CTA can point to contact until a form is wired up.</p>
-        <div className="mt-4 grid gap-4">
-          <Field
-            label="Heading"
-            value={c.leadMagnet.heading}
-            onChange={(e) => setC((p) => ({ ...p, leadMagnet: { ...p.leadMagnet, heading: e.target.value } }))}
-          />
-          <Area
-            label="Intro"
-            value={c.leadMagnet.intro}
-            onChange={(e) => setC((p) => ({ ...p, leadMagnet: { ...p.leadMagnet, intro: e.target.value } }))}
-          />
-          <Area
-            label="Bullets (one per line)"
-            value={c.leadMagnet.bullets.join("\n")}
-            rows={4}
-            onChange={(e) =>
-              setC((p) => ({
-                ...p,
-                leadMagnet: {
-                  ...p.leadMagnet,
-                  bullets: e.target.value
-                    .split("\n")
-                    .map((s) => s.trim())
-                    .filter(Boolean),
-                },
-              }))
-            }
-          />
-          <Field
-            label="CTA label"
-            value={c.leadMagnet.ctaLabel}
-            onChange={(e) => setC((p) => ({ ...p, leadMagnet: { ...p.leadMagnet, ctaLabel: e.target.value } }))}
-          />
-          <Field
-            label="CTA URL"
-            value={c.leadMagnet.ctaUrl}
-            onChange={(e) => setC((p) => ({ ...p, leadMagnet: { ...p.leadMagnet, ctaUrl: e.target.value } }))}
-          />
-        </div>
-      </section>
-
-      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
         <h2 className="text-lg font-bold text-navy">SEO block</h2>
         <div className="mt-4 grid gap-4">
           <Area

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { BrandLogo } from "./BrandLogo";
 import { Container } from "./Container";
 
 export function Footer() {
@@ -8,12 +8,7 @@ export function Footer() {
     <footer className="mt-auto bg-navy text-white">
       <Container className="py-12 md:py-14">
         <div className="flex flex-col items-center text-center">
-          <Link
-            href="/"
-            className="text-xl font-bold tracking-tight text-white transition-colors duration-200 hover:text-accent"
-          >
-            NAVI
-          </Link>
+          <BrandLogo variant="footer" />
           <p className="mt-2 max-w-md text-base font-medium text-accent">
             Change management software for organizational transformation
           </p>

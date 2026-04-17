@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { BrandLogo } from "./BrandLogo";
 import { Container } from "./Container";
 import { Button } from "./Button";
 
@@ -32,13 +33,9 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b border-hairline bg-white shadow-[0_1px_0_rgba(15,43,92,0.04)]">
       <Container>
         <div className="grid h-16 w-full grid-cols-[1fr_auto] items-center gap-4 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-          <Link
-            href="/"
-            className="justify-self-start text-lg font-bold tracking-tight text-navy transition-transform duration-300 ease-out hover:text-accent motion-safe:hover:scale-[1.03] motion-safe:active:scale-[0.98]"
-            onClick={() => setOpen(false)}
-          >
-            NAVI
-          </Link>
+          <div className="justify-self-start">
+            <BrandLogo variant="header" onClick={() => setOpen(false)} />
+          </div>
 
           <ul className="col-span-2 hidden items-center gap-5 md:col-span-1 md:col-start-2 md:row-start-1 md:flex md:justify-self-center lg:gap-7">
             {links.map(({ href, label, match }) => {

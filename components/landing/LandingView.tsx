@@ -4,7 +4,6 @@ import { Container } from "@/components/Container";
 import { FadeIn } from "@/components/FadeIn";
 import { StaggerIn } from "@/components/StaggerIn";
 import { ContactForm } from "@/components/ContactForm";
-import { Button } from "@/components/Button";
 import type { LandingContent } from "@/lib/cms/types";
 import { selfHostedGettingStartedSrc } from "@/lib/cms/hostedGettingStartedVideo";
 import { toVideoEmbedSrc } from "@/lib/videoEmbed";
@@ -29,7 +28,6 @@ export function LandingView({ content }: Props) {
     about,
     emotional,
     closingCta,
-    leadMagnet,
     privacy,
     contact,
     seoFooter,
@@ -86,43 +84,45 @@ export function LandingView({ content }: Props) {
 
       <section id="problem" className="scroll-mt-20 py-16 md:py-24">
         <Container>
-          <FadeIn>
-            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{problem.heading}</h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-navy sm:text-lg">{problem.intro}</p>
-          </FadeIn>
-          <FadeIn className="mt-10" delay={60}>
-            <ul className="mx-auto max-w-3xl space-y-4">
-              {problem.bullets.map((line) => (
-                <li key={line} className="flex gap-3 text-base leading-relaxed text-navy sm:text-lg">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mx-auto mt-10 max-w-3xl text-base font-semibold leading-snug text-navy sm:text-lg">
-              {problem.closingLine}
-            </p>
-          </FadeIn>
+          <div className="mx-auto max-w-3xl">
+            <FadeIn>
+              <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{problem.heading}</h2>
+              <p className="mt-4 text-base leading-relaxed text-navy sm:text-lg">{problem.intro}</p>
+            </FadeIn>
+            <FadeIn className="mt-10" delay={60}>
+              <ul className="space-y-4">
+                {problem.bullets.map((line) => (
+                  <li key={line} className="flex gap-3 text-base leading-relaxed text-navy sm:text-lg">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-10 text-base font-semibold leading-snug text-navy sm:text-lg">{problem.closingLine}</p>
+            </FadeIn>
+          </div>
         </Container>
       </section>
 
       <section id="solution" className="scroll-mt-20 bg-white py-16 md:py-24">
         <Container>
-          <FadeIn>
-            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{solution.heading}</h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-navy sm:text-lg">{solution.lead}</p>
-          </FadeIn>
-          <FadeIn className="mt-10" delay={60}>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">With NAVI, you can</p>
-            <ul className="mt-6 max-w-3xl space-y-4">
-              {solution.bullets.map((line) => (
-                <li key={line} className="flex gap-3 text-base leading-relaxed text-navy sm:text-lg">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
+          <div className="mx-auto max-w-3xl">
+            <FadeIn>
+              <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{solution.heading}</h2>
+              <p className="mt-4 text-base leading-relaxed text-navy sm:text-lg">{solution.lead}</p>
+            </FadeIn>
+            <FadeIn className="mt-10" delay={60}>
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">With NAVI, you can</p>
+              <ul className="mt-6 space-y-4">
+                {solution.bullets.map((line) => (
+                  <li key={line} className="flex gap-3 text-base leading-relaxed text-navy sm:text-lg">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+          </div>
         </Container>
       </section>
 
@@ -146,14 +146,16 @@ export function LandingView({ content }: Props) {
 
       <section id="differentiator" className="scroll-mt-20 bg-white py-16 md:py-24">
         <Container>
-          <FadeIn>
-            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{differentiator.heading}</h2>
-            <div className="mt-8 max-w-3xl space-y-6 text-base leading-relaxed text-navy sm:text-lg">
-              {differentiator.paragraphs.map((p) => (
-                <p key={p.slice(0, 48)}>{p}</p>
-              ))}
-            </div>
-          </FadeIn>
+          <div className="mx-auto max-w-3xl">
+            <FadeIn>
+              <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{differentiator.heading}</h2>
+              <div className="mt-8 space-y-6 text-base leading-relaxed text-navy sm:text-lg">
+                {differentiator.paragraphs.map((p) => (
+                  <p key={p.slice(0, 48)}>{p}</p>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
         </Container>
       </section>
 
@@ -265,20 +267,22 @@ export function LandingView({ content }: Props) {
 
       <section id="clarity" className="scroll-mt-20 bg-white py-16 md:py-24">
         <Container>
-          <FadeIn>
-            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{emotional.heading}</h2>
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-navy sm:text-lg">{emotional.intro}</p>
-            <ul className="mt-8 max-w-xl space-y-3">
-              {emotional.bullets.map((line) => (
-                <li
-                  key={line}
-                  className="rounded-xl border border-navy/10 bg-canvas px-4 py-3 text-base font-medium text-navy"
-                >
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
+          <div className="mx-auto max-w-3xl">
+            <FadeIn>
+              <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{emotional.heading}</h2>
+              <p className="mt-6 text-base leading-relaxed text-navy sm:text-lg">{emotional.intro}</p>
+              <ul className="mt-8 max-w-xl space-y-3">
+                {emotional.bullets.map((line) => (
+                  <li
+                    key={line}
+                    className="rounded-xl border border-navy/10 bg-canvas px-4 py-3 text-base font-medium text-navy"
+                  >
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+          </div>
         </Container>
       </section>
 
@@ -295,32 +299,6 @@ export function LandingView({ content }: Props) {
                 <Link href={hero.bookDemoUrl} className={`${ctaOnNavySecondary} w-full sm:w-auto`}>
                   {closingCta.secondaryCtaLabel}
                 </Link>
-              </div>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
-
-      <section id="lead-magnet" className="scroll-mt-20 py-16 md:py-24">
-        <Container>
-          <FadeIn>
-            <div className="mx-auto max-w-3xl rounded-2xl border border-accent/25 bg-white p-8 shadow-[0_8px_40px_rgba(0,115,252,0.08)] sm:p-10">
-              <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{leadMagnet.heading}</h2>
-              <p className="mt-4 text-base text-navy sm:text-lg">{leadMagnet.intro}</p>
-              <ul className="mt-6 space-y-2 text-base text-navy">
-                {leadMagnet.bullets.map((line) => (
-                  <li key={line} className="flex gap-2">
-                    <span className="font-bold text-accent" aria-hidden>
-                      ·
-                    </span>
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8">
-                <Button href={leadMagnet.ctaUrl} variant="getStarted" className="inline-flex !px-8">
-                  {leadMagnet.ctaLabel}
-                </Button>
               </div>
             </div>
           </FadeIn>
@@ -452,7 +430,7 @@ export function LandingView({ content }: Props) {
 
       <section className="border-t border-navy/10 bg-canvas py-12 md:py-14" aria-label="About NAVI for search">
         <Container>
-          <p className="mx-auto max-w-4xl text-center text-sm leading-relaxed text-navy/80 md:text-base">{seoFooter.body}</p>
+          <p className="mx-auto max-w-4xl text-sm leading-relaxed text-navy/80 md:text-base">{seoFooter.body}</p>
         </Container>
       </section>
     </>

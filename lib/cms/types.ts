@@ -71,13 +71,6 @@ export type LandingContent = {
     secondaryCtaLabel: string;
     supportLine: string;
   };
-  leadMagnet: {
-    heading: string;
-    intro: string;
-    bullets: string[];
-    ctaLabel: string;
-    ctaUrl: string;
-  };
   seoFooter: {
     body: string;
   };

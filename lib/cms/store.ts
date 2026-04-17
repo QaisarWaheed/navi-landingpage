@@ -84,7 +84,6 @@ export function mergeContent(saved: Partial<LandingContent>): LandingContent {
   const diff = saved.differentiator;
   const emo = saved.emotional;
   const close = saved.closingCta;
-  const magnet = saved.leadMagnet;
   const seoF = saved.seoFooter;
   const kw = saved.seoKeywords;
 
@@ -129,13 +128,6 @@ export function mergeContent(saved: Partial<LandingContent>): LandingContent {
       primaryCtaLabel: typeof close?.primaryCtaLabel === "string" ? close.primaryCtaLabel : d.closingCta.primaryCtaLabel,
       secondaryCtaLabel: typeof close?.secondaryCtaLabel === "string" ? close.secondaryCtaLabel : d.closingCta.secondaryCtaLabel,
       supportLine: typeof close?.supportLine === "string" ? close.supportLine : d.closingCta.supportLine,
-    },
-    leadMagnet: {
-      heading: typeof magnet?.heading === "string" ? magnet.heading : d.leadMagnet.heading,
-      intro: typeof magnet?.intro === "string" ? magnet.intro : d.leadMagnet.intro,
-      bullets: normalizeStrings(magnet?.bullets, d.leadMagnet.bullets),
-      ctaLabel: typeof magnet?.ctaLabel === "string" ? magnet.ctaLabel : d.leadMagnet.ctaLabel,
-      ctaUrl: typeof magnet?.ctaUrl === "string" ? magnet.ctaUrl : d.leadMagnet.ctaUrl,
     },
     seoFooter: {
       body: typeof seoF?.body === "string" ? seoF.body : d.seoFooter.body,

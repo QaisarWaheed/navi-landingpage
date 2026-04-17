@@ -104,13 +104,6 @@
     "secondaryCtaLabel": "Schedule a Demo",
     "supportLine": "Get a clear view of where your organization stands before making your next move."
   },
-  "leadMagnet": {
-    "heading": "Get your free change readiness report",
-    "intro": "Answer a few questions and receive a structured report outlining:",
-    "bullets": ["Key risks and gaps", "Readiness score", "Recommended focus areas"],
-    "ctaLabel": "Get My Report",
-    "ctaUrl": "/#contact"
-  },
   "seoFooter": {
     "body": "NAVI is a change management software platform designed to support organizational change, employee engagement, leadership alignment, and culture transformation. Whether you are managing digital transformation, restructuring, or business growth, NAVI provides the tools and insights needed to ensure successful change implementation."
   },
