@@ -14,7 +14,9 @@ export function Footer() {
           >
             NAVI
           </Link>
-          <p className="mt-2 text-base font-medium text-accent">Your Change Navigator</p>
+          <p className="mt-2 max-w-md text-base font-medium text-accent">
+            Change management software for organizational transformation
+          </p>
           <div className="mt-10 w-full max-w-md border-t border-white pt-8">
             <p className="text-sm text-white">
               © {year} NAVI. All Rights Reserved.

@@ -1,52 +1,156 @@
 {
   "hero": {
     "brandTitle": "NAVI",
-    "tagline": "Your Change Navigator",
-    "subtext": "Leading teams through the architecture of transformation.",
-    "rightEyebrow": "Modern SaaS Solutions",
-    "rightTitle": "Simplify Your Workflow",
-    "rightBody": "Bring plans, people, and progress together so your team can focus on outcomes—not overhead. NAVI keeps change visible, accountable, and on track.",
-    "getStartedUrl": "https://app.changewithnavi.com"
+    "headline": "Change Management Software for Leaders Driving Real Transformation",
+    "subheadline": "NAVI helps organizations plan, manage, and sustain change with clarity through real-time insights, structured workflows, and data-driven decision-making.",
+    "seoSupportLine": "Built for organizational change, culture transformation, and leadership alignment.",
+    "primaryCtaLabel": "Get Started Today",
+    "secondaryCtaLabel": "Book a Demo",
+    "getStartedUrl": "https://app.changewithnavi.com",
+    "bookDemoUrl": "/#contact",
+    "heroImageSrc": "/images/hero-leaders.jpg",
+    "heroImageAlt": "Leaders collaborating on organizational change in a modern office"
   },
-  "about": {
-    "heading": "About Us",
-    "lead": "We build the operating system for change—not another project tracker.",
-    "body": "NAVI helps leaders and teams replace scattered updates with a single narrative: what is changing, why it matters, and who does what next. From strategy to execution, you get clarity without the noise.",
-    "testimonialQuote": "NAVI gave our leadership team one story for transformation—finally everyone pulled in the same direction.",
-    "testimonialInitials": "SC",
-    "testimonialName": "Sarah Chen",
-    "testimonialRole": "Chief Strategy Officer"
+  "problem": {
+    "heading": "Why most change initiatives fail",
+    "intro": "Even with the right strategy, change often breaks down during execution.",
+    "bullets": [
+      "Lack of leadership alignment slows momentum",
+      "Employees resist unclear or poorly communicated change",
+      "Progress isn’t tracked in real time",
+      "Culture becomes a barrier instead of a driver"
+    ],
+    "closingLine": "Without structure, visibility, and alignment—change becomes costly."
+  },
+  "solution": {
+    "heading": "A smarter way to manage organizational change",
+    "lead": "NAVI is a modern change management platform designed to help leaders move from planning to execution without losing visibility or control.",
+    "bullets": [
+      "Assess change readiness across teams and departments",
+      "Identify risks and resistance early",
+      "Track adoption and engagement in real time",
+      "Make data-backed decisions throughout the change lifecycle"
+    ]
+  },
+  "features": {
+    "heading": "Everything you need to manage change effectively",
+    "items": [
+      {
+        "title": "Change Readiness Assessments",
+        "body": "Evaluate organizational readiness before implementation using structured, data-driven assessments."
+      },
+      {
+        "title": "Real-Time Change Dashboards",
+        "body": "Monitor progress, engagement, and risk indicators across teams and business units."
+      },
+      {
+        "title": "Employee Feedback & Sentiment Tracking",
+        "body": "Understand how your people are experiencing change—so you can respond early."
+      },
+      {
+        "title": "Actionable Leadership Insights",
+        "body": "Turn complex data into clear, practical next steps for leaders."
+      },
+      {
+        "title": "Scalable Change Management Tools",
+        "body": "Designed for department-level initiatives and enterprise-wide transformation."
+      }
+    ]
+  },
+  "differentiator": {
+    "heading": "More than software. Built for real-world change.",
+    "paragraphs": [
+      "Most tools focus on tracking tasks. NAVI focuses on driving adoption, alignment, and results.",
+      "It’s built from real experience in organizational change—not just theory—so leaders can move faster with confidence."
+    ]
   },
   "howItWorks": {
-    "heading": "How It Works",
+    "heading": "Designed for every stage of change",
     "steps": [
       {
-        "title": "Audit & Analyze",
-        "body": "Map stakeholders, constraints, and readiness so you know what to tackle first—and what to defer."
+        "title": "Before Change",
+        "body": "Assess readiness, identify gaps, and align leadership."
       },
       {
-        "title": "Design Roadmaps",
-        "body": "Sequence initiatives with clear owners, milestones, and measures everyone can follow."
+        "title": "During Change",
+        "body": "Track execution, monitor engagement, and address resistance."
       },
       {
-        "title": "Execute & Iterate",
-        "body": "Run the plan, capture learnings, and adjust without losing sight of the goal or your people."
+        "title": "After Change",
+        "body": "Measure adoption, reinforce behaviors, and sustain results."
       }
     ],
     "gettingStartedVideoUrl": "",
     "gettingStartedVideoHeading": "How to get started",
     "gettingStartedVideoSubtext": "Watch a short walkthrough of NAVI—set up your workspace and run your first change plan with confidence."
   },
+  "about": {
+    "heading": "What leaders are saying",
+    "lead": "Teams move faster when everyone shares one clear story for transformation.",
+    "body": "NAVI replaces scattered updates with a single narrative: what is changing, why it matters, and who does what next.",
+    "testimonialQuote": "NAVI gave our leadership team one story for transformation—finally everyone pulled in the same direction.",
+    "testimonialInitials": "SC",
+    "testimonialName": "Sarah Chen",
+    "testimonialRole": "Chief Strategy Officer"
+  },
+  "emotional": {
+    "heading": "Because leading change shouldn’t feel overwhelming",
+    "intro": "Leaders are expected to guide others through uncertainty—while navigating it themselves. NAVI gives you clarity in the moments that matter most:",
+    "bullets": ["What’s working", "What’s not", "What needs your attention next"]
+  },
+  "closingCta": {
+    "heading": "Start your change journey with clarity",
+    "primaryCtaLabel": "Get Started with NAVI today",
+    "secondaryCtaLabel": "Schedule a Demo",
+    "supportLine": "Get a clear view of where your organization stands before making your next move."
+  },
+  "leadMagnet": {
+    "heading": "Get your free change readiness report",
+    "intro": "Answer a few questions and receive a structured report outlining:",
+    "bullets": ["Key risks and gaps", "Readiness score", "Recommended focus areas"],
+    "ctaLabel": "Get My Report",
+    "ctaUrl": "/#contact"
+  },
+  "seoFooter": {
+    "body": "NAVI is a change management software platform designed to support organizational change, employee engagement, leadership alignment, and culture transformation. Whether you are managing digital transformation, restructuring, or business growth, NAVI provides the tools and insights needed to ensure successful change implementation."
+  },
+  "seoKeywords": [
+    "NAVI",
+    "change management software",
+    "change management platform",
+    "organizational change management",
+    "change readiness assessment",
+    "employee engagement during change",
+    "leadership alignment",
+    "culture transformation",
+    "digital transformation tools",
+    "change analytics",
+    "managing organizational change"
+  ],
   "resources": {
     "pageTitle": "Resources",
-    "pageIntro": "Articles and updates from the NAVI team—guides, ideas, and stories on navigating change.",
+    "pageIntro": "Articles and guides from the NAVI team on change management, readiness, and leading transformation with confidence.",
     "items": [
       {
-        "id": "sample-1",
-        "title": "Why change needs a single narrative",
-        "excerpt": "How leadership teams align faster when everyone sees the same story for transformation.",
-        "url": "https://changewithnavi.com",
-        "date": "March 2026"
+        "id": "article-leadership-alignment",
+        "title": "Leadership Alignment: The Missing Link in Successful Organizational Change",
+        "excerpt": "Learn why leadership alignment is critical to successful change and how misalignment at the top can derail even the best strategies.",
+        "url": "/resources/leadership-alignment",
+        "date": "April 2026"
+      },
+      {
+        "id": "article-future-change-mgmt",
+        "title": "The Future of Change Management: How Technology Is Transforming Organizational Change",
+        "excerpt": "Explore how technology platforms are transforming change management and helping organizations drive faster, more effective transformation.",
+        "url": "/resources/the-future-of-change-management",
+        "date": "April 2026"
+      },
+      {
+        "id": "article-why-change-fails",
+        "title": "Why Most Change Initiatives Fail And What Leaders Must Do Differently",
+        "excerpt": "Discover why most change initiatives fail and how leaders can drive successful transformation with the right strategy, alignment, and execution.",
+        "url": "/resources/why-most-change-initiatives-fail",
+        "date": "April 2026"
       }
     ]
   },
@@ -60,9 +164,9 @@
     "heading": "Get in Touch",
     "subtext": "Tell us about your organization—we'll get back to you shortly.",
     "sidebarTitle": "Contact Information",
-    "email": "hello@navi.io",
-    "phone": "+1 (800) 555-1234",
-    "addressLine1": "100 Navigator Way",
-    "addressLine2": "San Francisco, CA 94105"
+    "email": "navi@igcollaborative.com",
+    "phone": "",
+    "addressLine1": "Hamilton, Ontario, Canada",
+    "addressLine2": ""
   }
 }

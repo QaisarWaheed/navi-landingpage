@@ -1,5 +1,7 @@
 export type HowItWorksStep = { title: string; body: string };
 
+export type FeatureItem = { title: string; body: string };
+
 export type ResourceBlogItem = {
   id: string;
   title: string;
@@ -12,12 +14,42 @@ export type ResourceBlogItem = {
 export type LandingContent = {
   hero: {
     brandTitle: string;
-    tagline: string;
-    subtext: string;
-    rightEyebrow: string;
-    rightTitle: string;
-    rightBody: string;
+    headline: string;
+    subheadline: string;
+    seoSupportLine: string;
+    primaryCtaLabel: string;
+    secondaryCtaLabel: string;
     getStartedUrl: string;
+    bookDemoUrl: string;
+    heroImageSrc: string;
+    heroImageAlt: string;
+  };
+  problem: {
+    heading: string;
+    intro: string;
+    bullets: string[];
+    closingLine: string;
+  };
+  solution: {
+    heading: string;
+    lead: string;
+    bullets: string[];
+  };
+  features: {
+    heading: string;
+    items: FeatureItem[];
+  };
+  differentiator: {
+    heading: string;
+    paragraphs: string[];
+  };
+  howItWorks: {
+    heading: string;
+    steps: HowItWorksStep[];
+    /** YouTube or Vimeo watch URL; shown as embedded player when valid */
+    gettingStartedVideoUrl: string;
+    gettingStartedVideoHeading: string;
+    gettingStartedVideoSubtext: string;
   };
   about: {
     heading: string;
@@ -28,14 +60,28 @@ export type LandingContent = {
     testimonialName: string;
     testimonialRole: string;
   };
-  howItWorks: {
+  emotional: {
     heading: string;
-    steps: HowItWorksStep[];
-    /** YouTube or Vimeo watch URL; shown as embedded player when valid */
-    gettingStartedVideoUrl: string;
-    gettingStartedVideoHeading: string;
-    gettingStartedVideoSubtext: string;
+    intro: string;
+    bullets: string[];
   };
+  closingCta: {
+    heading: string;
+    primaryCtaLabel: string;
+    secondaryCtaLabel: string;
+    supportLine: string;
+  };
+  leadMagnet: {
+    heading: string;
+    intro: string;
+    bullets: string[];
+    ctaLabel: string;
+    ctaUrl: string;
+  };
+  seoFooter: {
+    body: string;
+  };
+  seoKeywords: string[];
   resources: {
     pageTitle: string;
     pageIntro: string;

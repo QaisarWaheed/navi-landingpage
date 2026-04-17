@@ -39,6 +39,7 @@ function Area({
 function LoginForm({ onSuccess }: { onSuccess: () => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -78,14 +79,24 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
         />
         <label className="block">
           <span className="text-sm font-medium text-navy">Password</span>
-          <input
-            type="password"
-            autoComplete="current-password"
-            className="mt-1 w-full rounded-lg border border-navy/20 px-3 py-2 text-sm text-navy"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="relative mt-1">
+            <input
+              type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
+              className="w-full rounded-lg border border-navy/20 py-2 pl-3 pr-[4.25rem] text-sm text-navy"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((v) => !v)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              className="absolute right-1 top-1/2 -translate-y-1/2 rounded-md px-2 py-1 text-xs font-semibold text-accent hover:bg-icon-tile hover:text-accent-hover"
+            >
+              {showPassword ? "Hide" : "View"}
+            </button>
+          </div>
         </label>
         {error && <p className="text-sm text-red-600">{error}</p>}
         <button
@@ -233,38 +244,160 @@ function Editor({
       <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
         <h2 className="text-lg font-bold text-navy">Hero</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <Field label="Brand title" value={c.hero.brandTitle} onChange={(e) => patchHero("brandTitle", e.target.value)} />
-          <Field label="Tagline" value={c.hero.tagline} onChange={(e) => patchHero("tagline", e.target.value)} />
-          <Area label="Left column subtext" value={c.hero.subtext} onChange={(e) => patchHero("subtext", e.target.value)} />
-          <Field label="Right eyebrow" value={c.hero.rightEyebrow} onChange={(e) => patchHero("rightEyebrow", e.target.value)} />
-          <Field label="Right headline" value={c.hero.rightTitle} onChange={(e) => patchHero("rightTitle", e.target.value)} />
-          <Area label="Right body" value={c.hero.rightBody} onChange={(e) => patchHero("rightBody", e.target.value)} />
+          <Field label="Brand / wordmark" value={c.hero.brandTitle} onChange={(e) => patchHero("brandTitle", e.target.value)} />
+          <Field label="Headline (SEO H1)" value={c.hero.headline} onChange={(e) => patchHero("headline", e.target.value)} />
           <div className="sm:col-span-2">
-            <Field
-              label="Get Started URL"
-              value={c.hero.getStartedUrl}
-              onChange={(e) => patchHero("getStartedUrl", e.target.value)}
-            />
+            <Area label="Subheadline" value={c.hero.subheadline} onChange={(e) => patchHero("subheadline", e.target.value)} />
           </div>
+          <div className="sm:col-span-2">
+            <Area label="SEO support line" value={c.hero.seoSupportLine} onChange={(e) => patchHero("seoSupportLine", e.target.value)} />
+          </div>
+          <Field label="Primary CTA label" value={c.hero.primaryCtaLabel} onChange={(e) => patchHero("primaryCtaLabel", e.target.value)} />
+          <Field label="Secondary CTA label" value={c.hero.secondaryCtaLabel} onChange={(e) => patchHero("secondaryCtaLabel", e.target.value)} />
+          <Field label="Get Started URL" value={c.hero.getStartedUrl} onChange={(e) => patchHero("getStartedUrl", e.target.value)} />
+          <Field label="Book demo URL (e.g. /#contact)" value={c.hero.bookDemoUrl} onChange={(e) => patchHero("bookDemoUrl", e.target.value)} />
+          <Field label="Hero image path or URL" value={c.hero.heroImageSrc} onChange={(e) => patchHero("heroImageSrc", e.target.value)} />
+          <Field label="Hero image alt text" value={c.hero.heroImageAlt} onChange={(e) => patchHero("heroImageAlt", e.target.value)} />
         </div>
       </section>
 
       <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-bold text-navy">About</h2>
+        <h2 className="text-lg font-bold text-navy">Problem</h2>
         <div className="mt-4 grid gap-4">
-          <Field label="Section heading" value={c.about.heading} onChange={(e) => patchAbout("heading", e.target.value)} />
-          <Area label="Lead line" value={c.about.lead} onChange={(e) => patchAbout("lead", e.target.value)} />
-          <Area label="Body" value={c.about.body} rows={4} onChange={(e) => patchAbout("body", e.target.value)} />
-          <Area label="Testimonial quote" value={c.about.testimonialQuote} onChange={(e) => patchAbout("testimonialQuote", e.target.value)} />
-          <div className="grid gap-4 sm:grid-cols-3">
-            <Field
-              label="Testimonial initials"
-              value={c.about.testimonialInitials}
-              onChange={(e) => patchAbout("testimonialInitials", e.target.value)}
-            />
-            <Field label="Name" value={c.about.testimonialName} onChange={(e) => patchAbout("testimonialName", e.target.value)} />
-            <Field label="Role" value={c.about.testimonialRole} onChange={(e) => patchAbout("testimonialRole", e.target.value)} />
+          <Field
+            label="Heading"
+            value={c.problem.heading}
+            onChange={(e) => setC((p) => ({ ...p, problem: { ...p.problem, heading: e.target.value } }))}
+          />
+          <Area
+            label="Intro"
+            value={c.problem.intro}
+            onChange={(e) => setC((p) => ({ ...p, problem: { ...p.problem, intro: e.target.value } }))}
+          />
+          <Area
+            label="Bullets (one per line)"
+            value={c.problem.bullets.join("\n")}
+            rows={5}
+            onChange={(e) =>
+              setC((p) => ({
+                ...p,
+                problem: {
+                  ...p.problem,
+                  bullets: e.target.value
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                },
+              }))
+            }
+          />
+          <Area
+            label="Closing line"
+            value={c.problem.closingLine}
+            onChange={(e) => setC((p) => ({ ...p, problem: { ...p.problem, closingLine: e.target.value } }))}
+          />
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">Solution</h2>
+        <div className="mt-4 grid gap-4">
+          <Field
+            label="Heading"
+            value={c.solution.heading}
+            onChange={(e) => setC((p) => ({ ...p, solution: { ...p.solution, heading: e.target.value } }))}
+          />
+          <Area
+            label="Lead"
+            value={c.solution.lead}
+            onChange={(e) => setC((p) => ({ ...p, solution: { ...p.solution, lead: e.target.value } }))}
+          />
+          <Area
+            label="Bullets (one per line)"
+            value={c.solution.bullets.join("\n")}
+            rows={5}
+            onChange={(e) =>
+              setC((p) => ({
+                ...p,
+                solution: {
+                  ...p.solution,
+                  bullets: e.target.value
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                },
+              }))
+            }
+          />
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">Features</h2>
+        <Field
+          label="Section heading"
+          value={c.features.heading}
+          onChange={(e) => setC((p) => ({ ...p, features: { ...p.features, heading: e.target.value } }))}
+        />
+        {c.features.items.map((item, i) => (
+          <div key={i} className="mt-4 rounded-lg border border-navy/10 p-4">
+            <p className="text-sm font-semibold text-navy">Feature {i + 1}</p>
+            <div className="mt-2 grid gap-3">
+              <Field
+                label="Title"
+                value={item.title}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setC((p) => {
+                    const items = [...p.features.items];
+                    items[i] = { ...items[i]!, title: v };
+                    return { ...p, features: { ...p.features, items } };
+                  });
+                }}
+              />
+              <Area
+                label="Body"
+                value={item.body}
+                rows={3}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setC((p) => {
+                    const items = [...p.features.items];
+                    items[i] = { ...items[i]!, body: v };
+                    return { ...p, features: { ...p.features, items } };
+                  });
+                }}
+              />
+            </div>
           </div>
+        ))}
+      </section>
+
+      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">Differentiator</h2>
+        <div className="mt-4 grid gap-4">
+          <Field
+            label="Heading"
+            value={c.differentiator.heading}
+            onChange={(e) => setC((p) => ({ ...p, differentiator: { ...p.differentiator, heading: e.target.value } }))}
+          />
+          <Area
+            label="Paragraphs (blank line between)"
+            value={c.differentiator.paragraphs.join("\n\n")}
+            rows={6}
+            onChange={(e) =>
+              setC((p) => ({
+                ...p,
+                differentiator: {
+                  ...p.differentiator,
+                  paragraphs: e.target.value
+                    .split(/\n\s*\n/)
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                },
+              }))
+            }
+          />
         </div>
       </section>
 
@@ -376,8 +509,163 @@ function Editor({
             }
           />
           <p className="text-xs text-navy/70">
-            The hero &quot;How to get started&quot; button scrolls to this player when a hosted file or valid embed URL is set.
+            When a hosted file or valid embed URL is set, add a link to <code className="rounded bg-canvas px-1">/#getting-started-video</code>{" "}
+            from your nav or body copy so visitors can open this player.
           </p>
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">About</h2>
+        <div className="mt-4 grid gap-4">
+          <Field label="Section heading" value={c.about.heading} onChange={(e) => patchAbout("heading", e.target.value)} />
+          <Area label="Lead line" value={c.about.lead} onChange={(e) => patchAbout("lead", e.target.value)} />
+          <Area label="Body" value={c.about.body} rows={4} onChange={(e) => patchAbout("body", e.target.value)} />
+          <Area label="Testimonial quote" value={c.about.testimonialQuote} onChange={(e) => patchAbout("testimonialQuote", e.target.value)} />
+          <div className="grid gap-4 sm:grid-cols-3">
+            <Field
+              label="Testimonial initials"
+              value={c.about.testimonialInitials}
+              onChange={(e) => patchAbout("testimonialInitials", e.target.value)}
+            />
+            <Field label="Name" value={c.about.testimonialName} onChange={(e) => patchAbout("testimonialName", e.target.value)} />
+            <Field label="Role" value={c.about.testimonialRole} onChange={(e) => patchAbout("testimonialRole", e.target.value)} />
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">Emotional / clarity</h2>
+        <div className="mt-4 grid gap-4">
+          <Field
+            label="Heading"
+            value={c.emotional.heading}
+            onChange={(e) => setC((p) => ({ ...p, emotional: { ...p.emotional, heading: e.target.value } }))}
+          />
+          <Area
+            label="Intro"
+            value={c.emotional.intro}
+            rows={3}
+            onChange={(e) => setC((p) => ({ ...p, emotional: { ...p.emotional, intro: e.target.value } }))}
+          />
+          <Area
+            label="Bullets (one per line)"
+            value={c.emotional.bullets.join("\n")}
+            rows={4}
+            onChange={(e) =>
+              setC((p) => ({
+                ...p,
+                emotional: {
+                  ...p.emotional,
+                  bullets: e.target.value
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                },
+              }))
+            }
+          />
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">Closing CTA band</h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <Field
+            label="Heading"
+            value={c.closingCta.heading}
+            onChange={(e) => setC((p) => ({ ...p, closingCta: { ...p.closingCta, heading: e.target.value } }))}
+          />
+          <Field
+            label="Primary CTA label"
+            value={c.closingCta.primaryCtaLabel}
+            onChange={(e) => setC((p) => ({ ...p, closingCta: { ...p.closingCta, primaryCtaLabel: e.target.value } }))}
+          />
+          <Field
+            label="Secondary CTA label"
+            value={c.closingCta.secondaryCtaLabel}
+            onChange={(e) => setC((p) => ({ ...p, closingCta: { ...p.closingCta, secondaryCtaLabel: e.target.value } }))}
+          />
+          <div className="sm:col-span-2">
+            <Area
+              label="Support line"
+              value={c.closingCta.supportLine}
+              onChange={(e) => setC((p) => ({ ...p, closingCta: { ...p.closingCta, supportLine: e.target.value } }))}
+            />
+          </div>
+          <p className="text-xs text-navy/70 sm:col-span-2">
+            URLs reuse the hero &quot;Get Started&quot; and &quot;Book a demo&quot; targets.
+          </p>
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">Lead magnet</h2>
+        <p className="mt-1 text-sm text-navy/80">Optional funnel copy; CTA can point to contact until a form is wired up.</p>
+        <div className="mt-4 grid gap-4">
+          <Field
+            label="Heading"
+            value={c.leadMagnet.heading}
+            onChange={(e) => setC((p) => ({ ...p, leadMagnet: { ...p.leadMagnet, heading: e.target.value } }))}
+          />
+          <Area
+            label="Intro"
+            value={c.leadMagnet.intro}
+            onChange={(e) => setC((p) => ({ ...p, leadMagnet: { ...p.leadMagnet, intro: e.target.value } }))}
+          />
+          <Area
+            label="Bullets (one per line)"
+            value={c.leadMagnet.bullets.join("\n")}
+            rows={4}
+            onChange={(e) =>
+              setC((p) => ({
+                ...p,
+                leadMagnet: {
+                  ...p.leadMagnet,
+                  bullets: e.target.value
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                },
+              }))
+            }
+          />
+          <Field
+            label="CTA label"
+            value={c.leadMagnet.ctaLabel}
+            onChange={(e) => setC((p) => ({ ...p, leadMagnet: { ...p.leadMagnet, ctaLabel: e.target.value } }))}
+          />
+          <Field
+            label="CTA URL"
+            value={c.leadMagnet.ctaUrl}
+            onChange={(e) => setC((p) => ({ ...p, leadMagnet: { ...p.leadMagnet, ctaUrl: e.target.value } }))}
+          />
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-navy/10 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-bold text-navy">SEO block</h2>
+        <div className="mt-4 grid gap-4">
+          <Area
+            label="Footer SEO paragraph"
+            value={c.seoFooter.body}
+            rows={5}
+            onChange={(e) => setC((p) => ({ ...p, seoFooter: { ...p.seoFooter, body: e.target.value } }))}
+          />
+          <Area
+            label="Keywords (one per line, also used in page metadata)"
+            value={c.seoKeywords.join("\n")}
+            rows={8}
+            onChange={(e) =>
+              setC((p) => ({
+                ...p,
+                seoKeywords: e.target.value
+                  .split("\n")
+                  .map((s) => s.trim())
+                  .filter(Boolean),
+              }))
+            }
+          />
         </div>
       </section>
 
@@ -523,7 +811,6 @@ function Editor({
             <Area label="Intro text" value={c.contact.subtext} onChange={(e) => patchContact("subtext", e.target.value)} />
           </div>
           <Field label="Email (display)" value={c.contact.email} onChange={(e) => patchContact("email", e.target.value)} />
-          <Field label="Phone" value={c.contact.phone} onChange={(e) => patchContact("phone", e.target.value)} />
           <Field label="Address line 1" value={c.contact.addressLine1} onChange={(e) => patchContact("addressLine1", e.target.value)} />
           <Field label="Address line 2" value={c.contact.addressLine2} onChange={(e) => patchContact("addressLine2", e.target.value)} />
         </div>

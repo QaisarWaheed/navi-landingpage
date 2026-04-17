@@ -5,6 +5,10 @@ import type { LandingContent } from "@/lib/cms/types";
 
 type Props = { resources: LandingContent["resources"] };
 
+function isExternalUrl(url: string) {
+  return /^https?:\/\//i.test(url.trim());
+}
+
 export function ResourcesPageView({ resources }: Props) {
   const { pageTitle, pageIntro, items } = resources;
 
@@ -34,39 +38,50 @@ export function ResourcesPageView({ resources }: Props) {
             </FadeIn>
           ) : (
             <ul className="mx-auto grid max-w-3xl gap-6">
-              {items.map((item, i) => (
-                <FadeIn key={item.id} delay={i * 50}>
-                  <li>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block rounded-2xl border border-navy/10 bg-white p-6 shadow-[0_4px_20px_rgba(15,43,92,0.07)] transition-all duration-300 ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:border-accent motion-safe:hover:shadow-[0_18px_50px_rgba(15,43,92,0.12)]"
-                    >
-                      <div className="flex flex-wrap items-start justify-between gap-2">
-                        <h2 className="text-lg font-bold text-navy transition-colors group-hover:text-accent sm:text-xl">
-                          {item.title}
-                        </h2>
-                        {item.date ? (
-                          <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-navy/50">{item.date}</span>
-                        ) : null}
-                      </div>
-                      {item.excerpt ? (
-                        <p className="mt-3 text-sm leading-relaxed text-navy sm:text-base">{item.excerpt}</p>
+              {items.map((item, i) => {
+                const external = isExternalUrl(item.url);
+                const cardClass =
+                  "group block rounded-2xl border border-navy/10 bg-white p-6 shadow-[0_4px_20px_rgba(15,43,92,0.07)] transition-all duration-300 ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:border-accent motion-safe:hover:shadow-[0_18px_50px_rgba(15,43,92,0.12)]";
+                const inner = (
+                  <>
+                    <div className="flex flex-wrap items-start justify-between gap-2">
+                      <h2 className="text-lg font-bold text-navy transition-colors group-hover:text-accent sm:text-xl">
+                        {item.title}
+                      </h2>
+                      {item.date ? (
+                        <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-navy/50">{item.date}</span>
                       ) : null}
-                      <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent">
-                        Read article
-                        <span
-                          className="transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
-                          aria-hidden
-                        >
-                          →
-                        </span>
+                    </div>
+                    {item.excerpt ? (
+                      <p className="mt-3 text-sm leading-relaxed text-navy sm:text-base">{item.excerpt}</p>
+                    ) : null}
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent">
+                      Read article
+                      <span
+                        className="transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-1"
+                        aria-hidden
+                      >
+                        →
                       </span>
-                    </a>
-                  </li>
-                </FadeIn>
-              ))}
+                    </span>
+                  </>
+                );
+                return (
+                  <FadeIn key={item.id} delay={i * 50}>
+                    <li>
+                      {external ? (
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" className={cardClass}>
+                          {inner}
+                        </a>
+                      ) : (
+                        <Link href={item.url} className={cardClass}>
+                          {inner}
+                        </Link>
+                      )}
+                    </li>
+                  </FadeIn>
+                );
+              })}
             </ul>
           )}
         </Container>

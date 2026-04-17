@@ -27,13 +27,14 @@ export const metadata: Metadata = {
     template: "%s | NAVI",
   },
   description:
-    "NAVI helps you navigate organizational change with clarity—align stakeholders, track progress, and move from strategy to action with confidence.",
+    "NAVI is change management software for leaders—plan, manage, and sustain organizational change with real-time insights and structured workflows.",
   keywords: [
     "NAVI",
-    "change management",
-    "organizational change",
-    "transformation",
-    "SaaS",
+    "change management software",
+    "change management platform",
+    "organizational change management",
+    "leadership alignment",
+    "culture transformation",
   ],
   openGraph: {
     title: "NAVI — Your Change Navigator",

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { FadeIn } from "@/components/FadeIn";
@@ -8,50 +9,39 @@ import type { LandingContent } from "@/lib/cms/types";
 import { selfHostedGettingStartedSrc } from "@/lib/cms/hostedGettingStartedVideo";
 import { toVideoEmbedSrc } from "@/lib/videoEmbed";
 
-function HeroIcon() {
-  return (
-    <div
-      className="mb-2 inline-flex rounded-xl bg-icon-tile p-3.5 shadow-sm transition-all duration-300 ease-out motion-safe:hover:scale-105 motion-safe:hover:shadow-md"
-      aria-hidden
-    >
-      <svg className="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-        />
-      </svg>
-    </div>
-  );
-}
+/** Matched pair for dark navy bands: same height, radius, and motion; no Button variant conflicts. */
+const ctaOnNavyPrimary =
+  "inline-flex h-12 min-h-12 shrink-0 items-center justify-center rounded-lg bg-white px-8 text-center text-base font-semibold leading-none text-navy shadow-[0_4px_14px_rgba(0,0,0,0.18)] outline-none transition-all duration-300 hover:bg-icon-tile hover:shadow-[0_6px_22px_rgba(0,0,0,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0";
 
-function PlayIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={`block shrink-0 ${className}`}
-      width={18}
-      height={18}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M8 5v14l11-7L8 5z" />
-    </svg>
-  );
-}
+const ctaOnNavySecondary =
+  "inline-flex h-12 min-h-12 shrink-0 items-center justify-center rounded-lg border-2 border-white bg-transparent px-8 text-center text-base font-semibold leading-none text-white transition-all duration-300 hover:border-accent hover:bg-accent hover:text-white hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0";
 
 type Props = { content: LandingContent };
 
 export function LandingView({ content }: Props) {
-  const { hero, about, howItWorks, privacy, contact } = content;
+  const {
+    hero,
+    problem,
+    solution,
+    features,
+    differentiator,
+    howItWorks,
+    about,
+    emotional,
+    closingCta,
+    leadMagnet,
+    privacy,
+    contact,
+    seoFooter,
+  } = content;
   const mailHref = `mailto:${contact.email}`;
-  const phoneDigits = contact.phone.replace(/[^\d+]/g, "");
-  const telHref = `tel:${phoneDigits}`;
   const rawVideo = howItWorks.gettingStartedVideoUrl.trim();
   const hostedVideoSrc = selfHostedGettingStartedSrc(rawVideo);
   const embedVideoSrc = hostedVideoSrc ? null : toVideoEmbedSrc(howItWorks.gettingStartedVideoUrl);
   const showGettingStartedVideo = !!(hostedVideoSrc || embedVideoSrc);
-  const demoHref = showGettingStartedVideo ? "/#getting-started-video" : "/#how-it-works";
+
+  const heroImg = hero.heroImageSrc.trim();
+  const showHeroImage = heroImg.length > 0;
 
   return (
     <>
@@ -59,77 +49,115 @@ export function LandingView({ content }: Props) {
         <div className="grid md:grid-cols-2">
           <div className="flex flex-col justify-center bg-navy px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
             <StaggerIn className="flex flex-col gap-5" staggerMs={95}>
-              <HeroIcon />
-              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">{hero.brandTitle}</h1>
-              <p className="text-xl font-medium text-accent sm:text-2xl">{hero.tagline}</p>
-              <p className="max-w-md text-base leading-relaxed text-white sm:text-lg">{hero.subtext}</p>
-            </StaggerIn>
-          </div>
-          <div className="flex flex-col justify-center bg-white px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
-            <StaggerIn className="flex flex-col gap-5" staggerMs={95}>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{hero.rightEyebrow}</p>
-              <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
-                {hero.rightTitle}
-              </h2>
-              <p className="max-w-lg text-base leading-relaxed text-navy sm:text-lg">{hero.rightBody}</p>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">{hero.brandTitle}</p>
+              <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.35rem] lg:leading-tight">
+                {hero.headline}
+              </h1>
+              <p className="max-w-xl text-base leading-relaxed text-white/95 sm:text-lg">{hero.subheadline}</p>
+              <p className="max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">{hero.seoSupportLine}</p>
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-                <Button
-                  href={hero.getStartedUrl}
-                  variant="getStarted"
-                  className="inline-flex !h-12 min-h-12 shrink-0 !px-8 !py-0 text-base font-semibold shadow-none hover:shadow-sm"
-                >
-                  Get Started
-                </Button>
-                <Button
-                  href={demoHref}
-                  variant="outline"
-                  className="group inline-flex h-12 shrink-0 items-center justify-center rounded-lg border-2 border-accent bg-white px-8 text-base font-semibold text-navy transition-all duration-300 hover:border-accent hover:bg-accent hover:text-white hover:shadow-md motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0"
-                >
-                  <span className="inline-flex items-center gap-2.5">
-                    <PlayIcon className="text-accent transition-colors duration-300 ease-out group-hover:text-white motion-safe:group-hover:scale-110" />
-                    <span className="leading-none">{showGettingStartedVideo ? "How to get started" : "View demo"}</span>
-                  </span>
-                </Button>
+                <Link href={hero.getStartedUrl} className={ctaOnNavyPrimary}>
+                  {hero.primaryCtaLabel}
+                </Link>
+                <Link href={hero.bookDemoUrl} className={ctaOnNavySecondary}>
+                  {hero.secondaryCtaLabel}
+                </Link>
               </div>
             </StaggerIn>
+          </div>
+          <div className="relative min-h-[280px] bg-navy md:min-h-[420px]">
+            {showHeroImage ? (
+              <Image
+                src={heroImg}
+                alt={hero.heroImageAlt}
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            ) : (
+              <div className="flex h-full min-h-[280px] items-center justify-center bg-[#163565] text-sm text-white/60 md:min-h-full">
+                Hero image
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      <section id="about" className="scroll-mt-20 py-16 md:py-24">
+      <section id="problem" className="scroll-mt-20 py-16 md:py-24">
         <Container>
           <FadeIn>
-            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{about.heading}</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{problem.heading}</h2>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-navy sm:text-lg">{problem.intro}</p>
           </FadeIn>
-          <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
-            <FadeIn>
-              <p className="text-xl font-bold leading-snug text-navy sm:text-2xl">{about.lead}</p>
-              <p className="mt-6 text-base leading-relaxed text-navy sm:text-lg">{about.body}</p>
-            </FadeIn>
-            <FadeIn delay={80}>
-              <figure className="group rounded-2xl border border-navy/10 bg-white p-8 shadow-[0_4px_24px_rgba(15,43,92,0.08)] transition-all duration-300 ease-out motion-safe:hover:-translate-y-1.5 motion-safe:hover:border-accent motion-safe:hover:shadow-[0_16px_48px_rgba(15,43,92,0.12)]">
-                <blockquote className="text-base leading-relaxed text-navy sm:text-lg">
-                  &ldquo;{about.testimonialQuote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-8 flex items-center gap-4">
-                  <div
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-white transition-transform duration-300 ease-out motion-safe:group-hover:scale-105"
-                    aria-hidden
-                  >
-                    {about.testimonialInitials}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-navy">{about.testimonialName}</p>
-                    <p className="text-sm text-accent">{about.testimonialRole}</p>
-                  </div>
-                </figcaption>
-              </figure>
-            </FadeIn>
-          </div>
+          <FadeIn className="mt-10" delay={60}>
+            <ul className="mx-auto max-w-3xl space-y-4">
+              {problem.bullets.map((line) => (
+                <li key={line} className="flex gap-3 text-base leading-relaxed text-navy sm:text-lg">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mx-auto mt-10 max-w-3xl text-base font-semibold leading-snug text-navy sm:text-lg">
+              {problem.closingLine}
+            </p>
+          </FadeIn>
         </Container>
       </section>
 
-      <section id="how-it-works" className="scroll-mt-20 bg-white py-16 md:py-24">
+      <section id="solution" className="scroll-mt-20 bg-white py-16 md:py-24">
+        <Container>
+          <FadeIn>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{solution.heading}</h2>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-navy sm:text-lg">{solution.lead}</p>
+          </FadeIn>
+          <FadeIn className="mt-10" delay={60}>
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">With NAVI, you can</p>
+            <ul className="mt-6 max-w-3xl space-y-4">
+              {solution.bullets.map((line) => (
+                <li key={line} className="flex gap-3 text-base leading-relaxed text-navy sm:text-lg">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        </Container>
+      </section>
+
+      <section id="features" className="scroll-mt-20 py-16 md:py-24">
+        <Container>
+          <FadeIn>
+            <h2 className="text-center text-2xl font-bold tracking-tight text-navy sm:text-3xl">{features.heading}</h2>
+          </FadeIn>
+          <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {features.items.map((item, i) => (
+              <FadeIn key={`${item.title}-${i}`} delay={i * 50}>
+                <li className="h-full rounded-2xl border border-navy/10 bg-white p-6 shadow-sm transition-all duration-300 ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:border-accent/40 motion-safe:hover:shadow-md md:p-8">
+                  <h3 className="text-lg font-bold text-navy">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-navy sm:text-base">{item.body}</p>
+                </li>
+              </FadeIn>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      <section id="differentiator" className="scroll-mt-20 bg-white py-16 md:py-24">
+        <Container>
+          <FadeIn>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{differentiator.heading}</h2>
+            <div className="mt-8 max-w-3xl space-y-6 text-base leading-relaxed text-navy sm:text-lg">
+              {differentiator.paragraphs.map((p) => (
+                <p key={p.slice(0, 48)}>{p}</p>
+              ))}
+            </div>
+          </FadeIn>
+        </Container>
+      </section>
+
+      <section id="how-it-works" className="scroll-mt-20 bg-canvas py-16 md:py-24">
         <Container>
           <FadeIn>
             <h2 className="text-center text-2xl font-bold tracking-tight text-navy sm:text-3xl">
@@ -147,12 +175,12 @@ export function LandingView({ content }: Props) {
                     />
                   ) : null}
                   <div className="relative z-[1] flex shrink-0 flex-col items-center">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-white shadow-sm ring-4 ring-white md:h-10 md:w-10 md:text-base">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-white shadow-sm ring-4 ring-canvas md:h-10 md:w-10 md:text-base">
                       {i + 1}
                     </span>
                   </div>
-                  <div className="min-w-0 flex-1 rounded-2xl border border-navy/10 bg-canvas p-6 shadow-sm transition-all duration-300 ease-out motion-safe:hover:border-accent/50 md:p-8">
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Step {i + 1}</p>
+                  <div className="min-w-0 flex-1 rounded-2xl border border-navy/10 bg-white p-6 shadow-sm transition-all duration-300 ease-out motion-safe:hover:border-accent/50 md:p-8">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Stage {i + 1}</p>
                     <h3 className="mt-2 text-xl font-bold text-navy">{step.title}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-navy sm:text-base">{step.body}</p>
                   </div>
@@ -202,7 +230,104 @@ export function LandingView({ content }: Props) {
         </Container>
       </section>
 
-      <section id="privacy" className="scroll-mt-20 py-16 md:py-24">
+      <section id="about" className="scroll-mt-20 py-16 md:py-24">
+        <Container>
+          <FadeIn>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{about.heading}</h2>
+          </FadeIn>
+          <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
+            <FadeIn>
+              <p className="text-xl font-bold leading-snug text-navy sm:text-2xl">{about.lead}</p>
+              <p className="mt-6 text-base leading-relaxed text-navy sm:text-lg">{about.body}</p>
+            </FadeIn>
+            <FadeIn delay={80}>
+              <figure className="group rounded-2xl border border-navy/10 bg-white p-8 shadow-[0_4px_24px_rgba(15,43,92,0.08)] transition-all duration-300 ease-out motion-safe:hover:-translate-y-1.5 motion-safe:hover:border-accent motion-safe:hover:shadow-[0_16px_48px_rgba(15,43,92,0.12)]">
+                <blockquote className="text-base leading-relaxed text-navy sm:text-lg">
+                  &ldquo;{about.testimonialQuote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-8 flex items-center gap-4">
+                  <div
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-white transition-transform duration-300 ease-out motion-safe:group-hover:scale-105"
+                    aria-hidden
+                  >
+                    {about.testimonialInitials}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-navy">{about.testimonialName}</p>
+                    <p className="text-sm text-accent">{about.testimonialRole}</p>
+                  </div>
+                </figcaption>
+              </figure>
+            </FadeIn>
+          </div>
+        </Container>
+      </section>
+
+      <section id="clarity" className="scroll-mt-20 bg-white py-16 md:py-24">
+        <Container>
+          <FadeIn>
+            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{emotional.heading}</h2>
+            <p className="mt-6 max-w-3xl text-base leading-relaxed text-navy sm:text-lg">{emotional.intro}</p>
+            <ul className="mt-8 max-w-xl space-y-3">
+              {emotional.bullets.map((line) => (
+                <li
+                  key={line}
+                  className="rounded-xl border border-navy/10 bg-canvas px-4 py-3 text-base font-medium text-navy"
+                >
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        </Container>
+      </section>
+
+      <section id="cta" className="scroll-mt-20 bg-navy py-16 md:py-20">
+        <Container>
+          <FadeIn>
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">{closingCta.heading}</h2>
+              <p className="mt-5 text-base leading-relaxed text-white/85 sm:text-lg">{closingCta.supportLine}</p>
+              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
+                <Link href={hero.getStartedUrl} className={`${ctaOnNavyPrimary} w-full sm:w-auto`}>
+                  {closingCta.primaryCtaLabel}
+                </Link>
+                <Link href={hero.bookDemoUrl} className={`${ctaOnNavySecondary} w-full sm:w-auto`}>
+                  {closingCta.secondaryCtaLabel}
+                </Link>
+              </div>
+            </div>
+          </FadeIn>
+        </Container>
+      </section>
+
+      <section id="lead-magnet" className="scroll-mt-20 py-16 md:py-24">
+        <Container>
+          <FadeIn>
+            <div className="mx-auto max-w-3xl rounded-2xl border border-accent/25 bg-white p-8 shadow-[0_8px_40px_rgba(0,115,252,0.08)] sm:p-10">
+              <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">{leadMagnet.heading}</h2>
+              <p className="mt-4 text-base text-navy sm:text-lg">{leadMagnet.intro}</p>
+              <ul className="mt-6 space-y-2 text-base text-navy">
+                {leadMagnet.bullets.map((line) => (
+                  <li key={line} className="flex gap-2">
+                    <span className="font-bold text-accent" aria-hidden>
+                      ·
+                    </span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8">
+                <Button href={leadMagnet.ctaUrl} variant="getStarted" className="inline-flex !px-8">
+                  {leadMagnet.ctaLabel}
+                </Button>
+              </div>
+            </div>
+          </FadeIn>
+        </Container>
+      </section>
+
+      <section id="privacy" className="scroll-mt-20 bg-canvas py-16 md:py-24">
         <Container>
           <FadeIn>
             <div className="mx-auto max-w-3xl text-center">
@@ -268,22 +393,6 @@ export function LandingView({ content }: Props) {
                   <li className="group flex gap-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#163565] transition-transform duration-300 ease-out motion-safe:group-hover:scale-110">
                       <svg className="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-wide text-white">Phone</p>
-                      <a
-                        href={telHref}
-                        className="mt-1 block text-sm font-medium transition-colors duration-200 hover:text-accent"
-                      >
-                        {contact.phone}
-                      </a>
-                    </div>
-                  </li>
-                  <li className="group flex gap-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#163565] transition-transform duration-300 ease-out motion-safe:group-hover:scale-110">
-                      <svg className="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
@@ -292,8 +401,12 @@ export function LandingView({ content }: Props) {
                       <p className="text-xs font-medium uppercase tracking-wide text-white">Address</p>
                       <p className="mt-1 text-sm font-medium">
                         {contact.addressLine1}
-                        <br />
-                        {contact.addressLine2}
+                        {contact.addressLine2.trim() ? (
+                          <>
+                            <br />
+                            {contact.addressLine2}
+                          </>
+                        ) : null}
                       </p>
                     </div>
                   </li>
@@ -334,6 +447,12 @@ export function LandingView({ content }: Props) {
               </div>
             </FadeIn>
           </div>
+        </Container>
+      </section>
+
+      <section className="border-t border-navy/10 bg-canvas py-12 md:py-14" aria-label="About NAVI for search">
+        <Container>
+          <p className="mx-auto max-w-4xl text-center text-sm leading-relaxed text-navy/80 md:text-base">{seoFooter.body}</p>
         </Container>
       </section>
     </>
