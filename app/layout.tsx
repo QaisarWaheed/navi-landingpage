@@ -22,6 +22,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://landing-page.example.com"),
+  icons: {
+    icon: [{ url: "/images/favicon.jpeg", type: "image/jpeg" }],
+    apple: "/images/favicon.jpeg",
+  },
   title: {
     default: "NAVI — Your Change Navigator",
     template: "%s | NAVI",

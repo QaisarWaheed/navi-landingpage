@@ -5,6 +5,11 @@ import { ResourcesPageView } from "@/components/resources/ResourcesPageView";
 export const metadata: Metadata = {
   title: "Resources",
   description: "Guides, ideas, and updates from NAVI on navigating organizational change.",
+  alternates: {
+    types: {
+      "application/rss+xml": "https://rss.app/feeds/tiOAnwzgFZaJCNHj.xml",
+    },
+  },
 };
 
 export const dynamic = "force-dynamic";
