@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Button } from "./Button";
+
+const submitButtonClass =
+  "inline-flex w-full min-h-12 items-center justify-center rounded-lg border-2 border-navy/30 bg-accent px-6 py-3 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_4px_14px_rgba(15,43,92,0.2)] transition-all duration-300 hover:border-navy/45 hover:bg-accent-hover hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_6px_20px_rgba(15,43,92,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0";
 
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
@@ -159,14 +161,9 @@ export function ContactForm() {
       </div>
 
       <div className="space-y-3">
-        <Button
-          type="submit"
-          variant="primary"
-          disabled={pending}
-          className="w-full rounded-lg py-3 text-base font-semibold disabled:pointer-events-none"
-        >
+        <button type="submit" disabled={pending} className={submitButtonClass}>
           {pending ? "Sending…" : "Send Message"}
-        </Button>
+        </button>
         {formError && (
           <p className="text-sm text-red-600" role="alert">
             {formError}

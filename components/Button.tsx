@@ -1,6 +1,10 @@
 import Link from "next/link";
 import type { ReactNode, ComponentPropsWithoutRef } from "react";
 
+function isExternalHref(href: string) {
+  return /^https?:\/\//i.test(href.trim());
+}
+
 type BaseProps = {
   children: ReactNode;
   className?: string;
@@ -42,6 +46,21 @@ export function Button(props: ButtonProps) {
 
   if ("href" in props && props.href) {
     const { href, ...rest } = props;
+    if (isExternalHref(href)) {
+      const {
+        prefetch: _prefetch,
+        replace: _replace,
+        scroll: _scroll,
+        shallow: _shallow,
+        locale: _locale,
+        ...anchorRest
+      } = rest as typeof rest & Record<string, unknown>;
+      return (
+        <a href={href} className={styles} {...(anchorRest as ComponentPropsWithoutRef<"a">)}>
+          {children}
+        </a>
+      );
+    }
     return (
       <Link href={href} className={styles} {...rest}>
         {children}

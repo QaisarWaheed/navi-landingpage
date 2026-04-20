@@ -47,7 +47,6 @@ export function LandingView({ content }: Props) {
         <div className="grid md:grid-cols-2">
           <div className="flex flex-col justify-center bg-navy px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
             <StaggerIn className="flex flex-col gap-5" staggerMs={95}>
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">{hero.brandTitle}</p>
               <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.35rem] lg:leading-tight">
                 {hero.headline}
               </h1>
